@@ -109,7 +109,7 @@ def run_you():
     elif 'plus besoin de toi' in command:
         talk('pendant combien de temps je te laisse tranquille?')
         a = int(take_command())
-        talk('Daccord')
+        talk('Daccord a tout à lheure')
         time.sleep(a)
         print(a)
     elif 'tu vas bien' in command:
