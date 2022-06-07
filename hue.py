@@ -1,3 +1,4 @@
+import random
 import subprocess
 import json
 import os
@@ -9,12 +10,15 @@ import pywhatkit
 import datetime
 import wikipedia
 import pyjokes
+import time
 
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')[38]
 engine.setProperty('voice', voices.id)
+heure = datetime.datetime.now().strftime('%H:%M')
+
 
 
 
@@ -25,13 +29,13 @@ def talk(text):
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour < 12:
-        talk('Bonjour Vincent, a tu bien dormi ?')
+        talk('Bonjour Vincent, il est' + heure + 'as tu bien dormi ?')
         
     elif hour >= 12 and hour < 18:
-        talk('Bonjour Vincent, a tu passer une bonne matinée?')
+        talk('Bonjour Vincent, il est' + heure + 'as tu passer une bonne matinée?')
         
     else:
-        talk('Bonsoir Vincent, as tu passer une bonne journée?')
+        talk('Bonsoir Vincent, il est' + heure + 'as tu passer une bonne journée?')
         
 
 
@@ -59,13 +63,13 @@ def run_you():
         search = command.replace('trouve-moi', '')
         pywhatkit.search(search)
         talk('jai trouver ca sur google')
-    elif 'joue moi' in command:
-        song = command.replace('joue moi', '')
+    elif 'joue-moi' in command:
+        song = command.replace('joue-moi', '')
         pywhatkit.playonyt(song)
         talk('joue' + song)
     elif 'quelle heure est-il' in command:
-        time = datetime.datetime.now().strftime('%H:%M')
-        talk('Il est' + time)
+        heure = datetime.datetime.now().strftime('%H:%M')
+        talk('Il est' + heure)
     elif 'temps' in command:
         api_key = "Api key"
         base_url = "https://api.openweathermap.org/data/3.0/weather?"
@@ -102,6 +106,16 @@ def run_you():
         talk('édouard est super je nai jamais vu une personne aussi remarquable' )
     elif 'angie' in command:
         talk('angie est une personne formidable qui vien de finir ces examens et je sais bien que tu laime tres fort vincent')
+    elif 'plus besoin de toi' in command:
+        talk('pendant combien de temps je te laisse tranquille?')
+        a = int(take_command())
+        talk('Daccord')
+        time.sleep(a)
+        print(a)
+    elif 'tu vas bien' in command:
+        talk('Oui ca va ')        
+    elif 'tu es là' in command:
+        talk('Oui Vincent je suis bien la !')
     else:
         talk('Je nai pas entendu ')
         
