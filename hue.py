@@ -99,7 +99,7 @@ def run_you():
     elif 'oui et toi' in command:
         talk('Oui jai passer une bonne journée merci!')
     elif 'blague' in command:
-        talk(pyjokes.get_joke())
+        talk(pyjokes.get_joke(language="en", category="neutral"))
     elif 'térence' in command:
         talk('terence est un viking dans lame pret a ce battre pour ce quil veux')
     elif 'édouard' in command: 
