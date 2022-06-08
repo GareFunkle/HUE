@@ -3,16 +3,23 @@ import tkinter as tk
 framelist = []
 frame_index = 0
 count = 0
+animation_speed = 10
+# frame_index += animation_speed
+
 
 def animate_gif(count):
     l1.config(image = framelist[count])
-    count +=1
+    
+    count += 1
     
     if count > last_frame :
         count = 0
+    
         
     window.after(100, lambda : animate_gif(count))
 
+
+    
 
 window = tk.Tk()
 
@@ -30,9 +37,11 @@ while True:
             print("break")
             last_frame = frame_index -1
             break
+        frame_index += animation_speed
         framelist.append(frame)
         print(len(framelist), "frame")
         frame_index += 1
+        
         
 l1 = tk.Label(window, bg = '#202020', image = '')
 l1.pack()
