@@ -35,13 +35,13 @@ def talk(text):
 def wishMe():
     hour = int(datetime.datetime.now().hour)
     if hour >= 0 and hour < 12:
-        talk('Bonjour Vincent, il est' + heure + 'as tu bien dormi ?')
+        talk('Bonjour Monsieur, il est' + heure + 'avez-vous bien dormi ?')
         
     elif hour >= 12 and hour < 18:
-        talk('Bonjour Vincent, il est' + heure + 'as tu passer une bonne matinée?')
+        talk('Bonjour Monsieur, il est' + heure + 'avez-vous passer une bonne matinée?')
         
     else:
-        talk('Bonsoir Vincent, il est' + heure + 'as tu passer une bonne journée?')
+        talk('Bonsoir Monsieur, il est' + heure + 'avez-vous passer une bonne journée?')
         
 
 
@@ -53,8 +53,8 @@ def take_command():
             voice = listener.listen(source)
             command = listener.recognize_google(voice, language='fr-FR')
             command = command.lower()
-            if "u" in command:
-                command = command.replace('u', '')
+            if "you" in command:
+                command = command.replace('you', '')
                 print(command)
     except:
         pass
@@ -95,7 +95,7 @@ def run_you():
             print("Temperature (in kelvin unit) = " + str(current_temperature) + "\n atmospheric pressure (in hPa unit) = " + str(current_pressure) + "\n humidity (in percentage) = " + str(current_humidity) + "\n description = " + str(weather_description))
         else:
             talk('je nai pas trouver la ville')
-    elif 'u ca va ?' in command:
+    elif 'you ca va ?' in command:
         talk('oui tout vas bien')
     elif 'qui est' in command:
         person = command.replace('qui est ', '')
@@ -107,7 +107,7 @@ def run_you():
     elif 'blague' in command:
         talk(pyjokes.get_joke(language="fr", category="neutral"))
     elif 'plus besoin de toi' in command:
-        talk('pendant combien de temps je te laisse tranquille?')
+        talk('pendant combien de temps je vous laisse tranquille?')
         a = int(take_command())
         talk('Daccord a tout à lheure')
         time.sleep(a)
@@ -116,7 +116,7 @@ def run_you():
         talk('Oui ca va ')        
     elif 'tu es là' in command:
         talk('Oui Vincent je suis bien la !')
-    elif ' qui est tu' in command:
+    elif 'qui es-tu' in command:
         talk("Je vien d'une simple idee de la part de mon createur Vincent")
     else:
         talk('Je nai pas entendu ')
