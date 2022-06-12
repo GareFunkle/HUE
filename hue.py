@@ -15,9 +15,15 @@ import time
 
 listener = sr.Recognizer()
 engine = pyttsx3.init()
+rate = engine.getProperty('rate')
+engine.setProperty('rate', rate +15)
+volume = engine.getProperty('volume')
+engine.setProperty('volume', volume + 0.5)
 voices = engine.getProperty('voices')[38]
 engine.setProperty('voice', voices.id)
 heure = datetime.datetime.now().strftime('%H:%M')
+wikipedia.set_lang("fr")
+
 
 
 
@@ -39,7 +45,6 @@ def wishMe():
         
 
 
-
 def take_command():
     try:
         command = ''
@@ -48,8 +53,8 @@ def take_command():
             voice = listener.listen(source)
             command = listener.recognize_google(voice, language='fr-FR')
             command = command.lower()
-            if "You" in command:
-                command = command.replace('you', '')
+            if "u" in command:
+                command = command.replace('u', '')
                 print(command)
     except:
         pass
@@ -63,10 +68,10 @@ def run_you():
         search = command.replace('trouve-moi', '')
         pywhatkit.search(search)
         talk('jai trouver ca sur google')
-    elif 'joue-moi' in command:
-        song = command.replace('joue-moi', '')
+    elif 'met moi de la musique' in command:
+        song = command.replace('met moi de la musique', '')
         pywhatkit.playonyt(song)
-        talk('joue' + song)
+        talk('jai trouver ca sur youtube')
     elif 'quelle heure est-il' in command:
         heure = datetime.datetime.now().strftime('%H:%M')
         talk('Il est' + heure)
@@ -90,22 +95,17 @@ def run_you():
             print("Temperature (in kelvin unit) = " + str(current_temperature) + "\n atmospheric pressure (in hPa unit) = " + str(current_pressure) + "\n humidity (in percentage) = " + str(current_humidity) + "\n description = " + str(weather_description))
         else:
             talk('je nai pas trouver la ville')
+    elif 'u ca va ?' in command:
+        talk('oui tout vas bien')
     elif 'qui est' in command:
         person = command.replace('qui est ', '')
-        wikipedia.set_lang("fr")
         info = wikipedia.summary(person, 1)
         print(info)
         talk(info)
     elif 'oui et toi' in command:
         talk('Oui jai passer une bonne journée merci!')
     elif 'blague' in command:
-        talk(pyjokes.get_joke(language="en", category="neutral"))
-    elif 'térence' in command:
-        talk('terence est un viking dans lame pret a ce battre pour ce quil veux')
-    elif 'édouard' in command: 
-        talk('édouard est super je nai jamais vu une personne aussi remarquable' )
-    elif 'angie' in command:
-        talk('angie est une personne formidable qui vien de finir ces examens et je sais bien que tu laime tres fort vincent')
+        talk(pyjokes.get_joke(language="fr", category="neutral"))
     elif 'plus besoin de toi' in command:
         talk('pendant combien de temps je te laisse tranquille?')
         a = int(take_command())
@@ -116,6 +116,8 @@ def run_you():
         talk('Oui ca va ')        
     elif 'tu es là' in command:
         talk('Oui Vincent je suis bien la !')
+    elif ' qui est tu' in command:
+        talk("Je vien d'une simple idee de la part de mon createur Vincent")
     else:
         talk('Je nai pas entendu ')
         
